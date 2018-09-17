@@ -8,6 +8,7 @@ import com.google.ar.core.exceptions.UnavailableException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.sceneform.ux.ArFragment;
 
+//可以直接使用ArFragment   我这里为了中文提示
 public class MyArFragment extends ArFragment {
     @Override
     protected void handleSessionException(UnavailableException sessionException) {

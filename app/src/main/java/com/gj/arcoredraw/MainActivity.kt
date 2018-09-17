@@ -15,9 +15,6 @@ import com.google.ar.sceneform.rendering.ShapeFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-//    private val anchorArray = arrayListOf<Anchor>()
-//    private val dataTextArray = arrayListOf<String>()
-
     private val dataArray = arrayListOf<AnchorInfoBean>()
     private val lineNodeArray = arrayListOf<Node>()
     private val startNodeArray = arrayListOf<Node>()
@@ -26,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) //hunta 219
+        setContentView(R.layout.activity_main)
         initView()
     }
 
@@ -82,48 +79,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             dataAdapter.notifyDataSetChanged()
-
-//            when (pageState) {
-//                0 -> {
-//                    firstAnchor = hitResult.createAnchor()
-//
-//                    pageState = 1
-//
-//                    ToastUtils.showLong("已记录第一个点,点击屏幕 记录第二个点")
-//                }
-//
-//                1 -> {
-//                    val secondAnchor = hitResult.createAnchor()
-//                    drawLine(firstAnchor, secondAnchor)
-//
-//                    val startPose = firstAnchor.pose
-//                    val endPose = hitResult.hitPose
-//
-//                    val dx = startPose.tx() - endPose.tx()
-//                    val dy = startPose.ty() - endPose.ty()
-//                    val dz = startPose.tz() - endPose.tz()
-//
-//                    UI_distanceMeters.text = decimalFormat.format(Math.sqrt((dx * dx + dy * dy + dz * dz).toDouble())).toString()
-//
-//                    ToastUtils.showLong("点击屏幕 清除当前测距")
-//
-//                    pageState = 2
-//                }
-//
-//                2 -> {
-//                    ToastUtils.showLong("清除成功")
-//
-//                    firstAnchor.detach()
-//                    firstAnchorNode.removeChild(lineNode)
-//                    (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(firstAnchorNode)
-//                    pageState = 0
-//                }
-//            }
         }
     }
-
-//    private lateinit var firstAnchorNode: Node
-//    private lateinit var lineNode: Node
 
     private fun drawLine(firstAnchor: Anchor, secondAnchor: Anchor) {
         val firstAnchorNode = AnchorNode(firstAnchor)
