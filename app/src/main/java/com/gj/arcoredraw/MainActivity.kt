@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(startNode)
                 }
                 else -> {
-                    dataArray.removeAt(dataArray.size-1)
+                    dataArray.removeAt(dataArray.size - 1)
                     val index = startNodeArray.size - 1
                     startNodeArray[index].removeChild(lineNodeArray.removeAt(index))
                     endNodeArray[index].removeChild(sphereNodeArray.removeAt(index + 1))
@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
             val json = Gson().toJson(tempJsonArray)
 
             val intent = Intent()
-            intent.setClass(this@MainActivity,WebActivity::class.java)
-            intent.putExtra("url","http://47.100.46.19/demo/example/index.html?points=${json}")
+            intent.setClass(this@MainActivity, WebActivity::class.java)
+            intent.putExtra("url", "http://47.100.46.19/demo/example/index.html?points=${json}")
 
             ActivityUtils.startActivity(intent)
 
@@ -193,7 +193,7 @@ class MainActivity : AppCompatActivity() {
                         ViewRenderable.builder()
                                 .setView(this@MainActivity, R.layout.renderable_text)
                                 .build()
-                                .thenAccept { it->
+                                .thenAccept { it ->
                                     (it.view as TextView).text = "${String.format("%.1f", length * 100)}CM"
                                     val node = Node()
                                     node.setParent(lineNode)
