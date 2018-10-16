@@ -1,9 +1,11 @@
 package com.gj.arcoredraw
 
+import android.content.Intent
 import android.icu.text.DecimalFormat
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
@@ -12,6 +14,7 @@ import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.MaterialFactory
 import com.google.ar.sceneform.rendering.ShapeFactory
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -79,6 +82,52 @@ class MainActivity : AppCompatActivity() {
             }
 
             dataAdapter.notifyDataSetChanged()
+        }
+
+
+        UI_Post.setOnClickListener {
+            if (dataArray.size < 3) {
+                ToastUtils.showLong("最少三个点")
+                return@setOnClickListener
+            }
+
+            val tempJsonArray = arrayListOf<Float>()
+
+            dataArray.mapIndexed { index, anchorInfoBean ->
+                if (index == dataArray.size - 1) {
+
+
+                    val startPose = dataArray[0].anchor.pose
+                    val endPose = anchorInfoBean.anchor.pose
+                    val dx = startPose.tx() - endPose.tx()
+                    val dy = startPose.ty() - endPose.ty()
+                    val dz = startPose.tz() - endPose.tz()
+
+                    if (Math.sqrt((dx * dx + dy * dy + dz * dz).toDouble()) > 1) {
+                        val node = AnchorNode(anchorInfoBean.anchor)
+                        tempJsonArray.add(node.worldPosition.x)
+                        tempJsonArray.add(node.worldPosition.z)
+                    } else {
+                    }
+                } else {
+                    val node = AnchorNode(anchorInfoBean.anchor)
+                    tempJsonArray.add(node.worldPosition.x)
+                    tempJsonArray.add(node.worldPosition.z)
+                }
+            }
+
+
+            val json = Gson().toJson(tempJsonArray)
+
+            UI_PostText.text = json
+
+            val intent = Intent()
+            intent.setClass(this@MainActivity,WebActivity::class.java)
+            intent.putExtra("url","http://47.100.46.19/demo/example/index.html?points=${json}")
+
+            this@MainActivity.startActivity(intent)
+
+            LogUtils.d(json)
         }
     }
 

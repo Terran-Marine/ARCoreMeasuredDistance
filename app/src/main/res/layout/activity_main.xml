@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/UI_DataRecyclerView"
         android:layout_width="match_parent"
@@ -28,10 +27,21 @@
         android:textColor="@android:color/black"
         android:textSize="12sp" />
 
+    <TextView
+        android:id="@+id/UI_PostText"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@+id/UI_TotalText"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="12sp" />
+
     <LinearLayout
-        android:layout_above="@id/UI_TotalText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/UI_TotalText"
+        android:layout_marginBottom="50dp"
         android:orientation="horizontal">
 
         <Button
@@ -40,6 +50,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="重置" />
+
+        <Button
+            android:id="@+id/UI_Post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="发送" />
 
     </LinearLayout>
 
