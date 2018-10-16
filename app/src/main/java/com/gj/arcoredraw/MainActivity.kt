@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                     sphereNodeArray.clear()
                     startNodeArray.clear()
                     endNodeArray.clear()
-//                    startNode.removeChild(sphereNodeArray[0])
                     (UI_ArSceneView as MyArFragment).arSceneView.scene.removeChild(startNode)
                 }
                 else -> {
@@ -94,10 +93,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("url", "http://47.100.46.19/demo/example/index.html?points=${json}")
 
             ActivityUtils.startActivity(intent)
-
-
         }
-
         initAr()
     }
 
@@ -132,7 +128,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 startNode = AnchorNode(hitResult.createAnchor())
                 startNode.setParent((UI_ArSceneView as MyArFragment).arSceneView.scene)
-                MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(255f, 255f, 255f))
+                MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.131f, 0.111f, 0.255f))
                         .thenAccept { material ->
 
 
@@ -160,8 +156,7 @@ class MainActivity : AppCompatActivity() {
             firstAnchorNode.setParent((UI_ArSceneView as MyArFragment).arSceneView.scene)
             secondAnchorNode.setParent((UI_ArSceneView as MyArFragment).arSceneView.scene)
 
-
-            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(255f, 255f, 255f))
+            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.131f, 0.111f, 0.255f))
                     .thenAccept { material ->
                         val sphere = ShapeFactory.makeSphere(0.02f, Vector3(0.0f, 0.0f, 0.0f), material)
                         val node = Node()
@@ -178,9 +173,7 @@ class MainActivity : AppCompatActivity() {
             val directionFromTopToBottom = difference.normalized()
             val rotationFromAToB = Quaternion.lookRotation(directionFromTopToBottom, Vector3.up())
 
-
-
-            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(255f, 255f, 255f))
+            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.131f, 0.111f, 0.255f))
                     .thenAccept { material ->
                         val lineMode = ShapeFactory.makeCube(Vector3(0.01f, 0.01f, difference.length()), Vector3.zero(), material)
                         val lineNode = Node()
@@ -201,7 +194,6 @@ class MainActivity : AppCompatActivity() {
                                     node.localPosition = Vector3(0f, 0.02f, 0f)
                                     node.renderable = it
                                 }
-
                     }
         }
     }
