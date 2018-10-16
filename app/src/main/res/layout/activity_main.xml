@@ -1,64 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/UI_ContentView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <fragment
-        android:id="@+id/UI_ArSceneView"
         android:name="com.gj.arcoredraw.MyArFragment"
+        android:id="@+id/UI_ArSceneView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/UI_DataRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
 
-    <TextView
-        android:id="@+id/UI_TotalText"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+    <ImageView
+        android:src="@drawable/ar_last"
+        android:id="@+id/UI_Last"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/UI_PostText"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_above="@+id/UI_TotalText"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/UI_TotalText"
-        android:layout_marginBottom="50dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/UI_Reset"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="重置" />
-
-        <Button
-            android:id="@+id/UI_Post"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="发送" />
-
-    </LinearLayout>
+    <ImageView
+        android:src="@drawable/ar_post"
+        android:id="@+id/UI_Post"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
