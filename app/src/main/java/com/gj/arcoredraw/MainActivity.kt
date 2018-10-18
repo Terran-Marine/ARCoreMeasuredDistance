@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.Node
+import com.google.ar.sceneform.math.MathHelper
 import com.google.ar.sceneform.math.Quaternion
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.MaterialFactory
@@ -188,7 +189,7 @@ class MainActivity : AppCompatActivity() {
                                 .build()
                                 .thenAccept { it ->
                                     (it.view as TextView).text = "${String.format("%.1f", length * 100)}CM"
-                                    val node = Node()
+                                    val node = FaceToCameraNode()
                                     node.setParent(lineNode)
                                     node.localRotation = Quaternion.axisAngle(Vector3(0f, 1f, 0f), 90f)
                                     node.localPosition = Vector3(0f, 0.02f, 0f)

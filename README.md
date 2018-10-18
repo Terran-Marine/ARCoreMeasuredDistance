@@ -9,5 +9,3 @@
 <img width="540" height="1122" src="https://github.com/ToadPrincess/ARCoreMeasuredDistance/blob/master/preview3.jpg?raw=true"/>
 
 <img width="540" height="1122" src="https://github.com/ToadPrincess/ARCoreMeasuredDistance/blob/master/preview4.jpg?raw=true"/>
-
-
