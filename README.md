@@ -7,6 +7,6 @@
 * 距离标签始终面向相机
 
    
-<img width="1122" height="540" src="https://github.com/ToadPrincess/ARCoreMeasuredDistance/blob/master/preview3.jpg?raw=true"/>
+<img width="1122" height="540" src="https://github.com/Terran-Marine/ARCoreMeasuredDistance/blob/master/preview3.jpg?raw=true"/>
 
-<img width="1122" height="540" src="https://github.com/ToadPrincess/ARCoreMeasuredDistance/blob/master/preview4.jpg?raw=true"/>
+<img width="1122" height="540" src="https://github.com/Terran-Marine/ARCoreMeasuredDistance/blob/master/preview4.jpg?raw=true"/>
