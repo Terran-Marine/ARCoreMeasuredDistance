@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             }
             val tempJsonArray = arrayListOf<Float>()
 
-            dataArray.mapIndexed { index, anchorInfoBean ->
+            dataArray.forEachIndexed { index, anchorInfoBean ->
                 if (index == dataArray.size - 1) {
                     val startPose = dataArray[0].anchor.pose
                     val endPose = anchorInfoBean.anchor.pose
@@ -87,13 +87,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val json = Gson().toJson(tempJsonArray)
-
-            val intent = Intent()
-            intent.setClass(this@MainActivity, WebActivity::class.java)
-            intent.putExtra("url", "http://47.100.46.19/demo/example/index.html?points=${json}")
-
-            ActivityUtils.startActivity(intent)
+            ActivityUtils.startActivity( Intent().apply {
+                setClass(this@MainActivity, WebActivity::class.java)
+                putExtra("url", "http://47.100.46.19/demo/example/index.html?points=${Gson().toJson(tempJsonArray)}")
+            })
         }
         initAr()
     }
@@ -104,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     private val startNodeArray = arrayListOf<Node>()
     private val endNodeArray = arrayListOf<Node>()
 
-    lateinit var startNode: AnchorNode
+    private  lateinit var startNode: AnchorNode
 
     @SuppressLint("NewApi")
     private fun initAr() {
@@ -129,18 +126,14 @@ class MainActivity : AppCompatActivity() {
             } else {
                 startNode = AnchorNode(hitResult.createAnchor())
                 startNode.setParent((UI_ArSceneView as MyArFragment).arSceneView.scene)
-                MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.131f, 0.111f, 0.255f))
+                MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.33f, 0.87f, 0f))
                         .thenAccept { material ->
-
-
                             val sphere = ShapeFactory.makeSphere(0.02f, Vector3.zero(), material)
-                            val node = Node()
-                            node.setParent(startNode)
-                            node.localPosition = Vector3.zero()
-
-                            node.renderable = sphere
-
-                            sphereNodeArray.add(node)
+                            sphereNodeArray.add(    Node().apply {
+                                setParent(startNode)
+                                localPosition = Vector3.zero()
+                                renderable = sphere
+                            })
                         }
             }
         }
@@ -157,14 +150,14 @@ class MainActivity : AppCompatActivity() {
             firstAnchorNode.setParent((UI_ArSceneView as MyArFragment).arSceneView.scene)
             secondAnchorNode.setParent((UI_ArSceneView as MyArFragment).arSceneView.scene)
 
-            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.131f, 0.111f, 0.255f))
+            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.53f, 0.92f, 0f))
                     .thenAccept { material ->
                         val sphere = ShapeFactory.makeSphere(0.02f, Vector3(0.0f, 0.0f, 0.0f), material)
-                        val node = Node()
-                        node.setParent(secondAnchorNode)
-                        node.localPosition = Vector3.zero()
-                        node.renderable = sphere
-                        sphereNodeArray.add(node)
+                        sphereNodeArray.add(Node().apply {
+                            setParent(secondAnchorNode)
+                            localPosition = Vector3.zero()
+                            renderable = sphere
+                        })
                     }
 
             val firstWorldPosition = firstAnchorNode.worldPosition
@@ -174,28 +167,41 @@ class MainActivity : AppCompatActivity() {
             val directionFromTopToBottom = difference.normalized()
             val rotationFromAToB = Quaternion.lookRotation(directionFromTopToBottom, Vector3.up())
 
-            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.131f, 0.111f, 0.255f))
+            MaterialFactory.makeOpaqueWithColor(this@MainActivity, com.google.ar.sceneform.rendering.Color(0.33f, 0.87f, 0f))
                     .thenAccept { material ->
                         val lineMode = ShapeFactory.makeCube(Vector3(0.01f, 0.01f, difference.length()), Vector3.zero(), material)
-                        val lineNode = Node()
-                        lineNode.setParent(firstAnchorNode)
-                        lineNode.renderable = lineMode
-                        lineNode.worldPosition = Vector3.add(firstWorldPosition, secondWorldPosition).scaled(0.5f)
-                        lineNode.worldRotation = rotationFromAToB
-                        lineNodeArray.add(lineNode)
+                        val lineNode = Node().apply {
+                            setParent(firstAnchorNode)
+                                renderable = lineMode
+                                worldPosition = Vector3.add(firstWorldPosition, secondWorldPosition).scaled(0.5f)
+                                worldRotation = rotationFromAToB
+                        }
+                        lineNodeArray.add(Node().apply {
+                            setParent(firstAnchorNode)
+                            renderable = lineMode
+                            worldPosition = Vector3.add(firstWorldPosition, secondWorldPosition).scaled(0.5f)
+                            worldRotation = rotationFromAToB
+                        })
 
                         ViewRenderable.builder()
                                 .setView(this@MainActivity, R.layout.renderable_text)
                                 .build()
                                 .thenAccept { it ->
                                     (it.view as TextView).text = "${String.format("%.1f", length * 100)}CM"
-                                    val node = FaceToCameraNode()
-                                    node.setParent(lineNode)
-                                    node.localRotation = Quaternion.axisAngle(Vector3(0f, 1f, 0f), 90f)
-                                    node.localPosition = Vector3(0f, 0.02f, 0f)
-                                    node.renderable = it
+                                    it.isShadowCaster = false
+                                    FaceToCameraNode().apply {
+                                        setParent(lineNode)
+                                        localRotation = Quaternion.axisAngle(Vector3(0f, 1f, 0f), 90f)
+                                        localPosition = Vector3(0f, 0.02f, 0f)
+                                        renderable = it
+                                    }
                                 }
                     }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (UI_ArSceneView as MyArFragment).onDestroy()
     }
 }
