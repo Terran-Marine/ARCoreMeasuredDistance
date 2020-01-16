@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C4B199"
+    android:orientation="vertical"
+    tools:context=".ChooseActivity">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/UI_Main"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="#3959C0"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="80dp">
+
+        <TextView
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:text="多点测距"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/UI_Cross"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardBackgroundColor="#3959C0"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="80dp">
+
+        <TextView
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:text="工字型"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
